@@ -1,4 +1,4 @@
-{% extends 'rooms/room_layout.html' %}
+{% extends 'layout.html' %}
 
 {% block content %}
     <div class="row">
@@ -49,7 +49,7 @@
                     <input value="{{ image }}" type="file" class="form-control-file" id="image" name="image">
                 </div>
                 <button type="submit" class="btn btn-primary">Изменить</button>
-                <a href="{% url 'room_list' %}" class="btn btn-secondary">назад</a>
+                <a href="{% url 'room_detail' room_id %}" class="btn btn-secondary">назад</a>
             </form>
         </div>
         <div class="col-3"></div>

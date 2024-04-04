@@ -19,11 +19,15 @@
                     <p id="collapseExample" class="collapse card-text">{{ room.description }}</p>
                     <p class="card-text {% if room.is_available %}text-success{% else %}text-danger{% endif %}">
                         {% if room.is_available %}Доступна{% else %}Недоступна{% endif %}</p>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'room_update' room_id=room.id %}" class="btn btn-primary">Изменить</a>
                     <button type="button" class="btn btn-outline-danger" data-toggle="modal"
                             data-target="#deleteModal">
                         Удалить
                     </button>
+                    {% else %}
+                        <a href="#" class="btn btn-outline-primary">Бронировать</a>
+                    {% endif %}
                     <a href="{% url 'room_list' %}" class="btn btn-secondary">Назад</a>
                 </div>
             </div>

@@ -24,9 +24,9 @@
                         <a href="{% url 'room_create' %}" class="nav-link text-success">Добавить комнату</a>
                     {% endif %}
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bookings</a>
-                </li>
+                {% block header %}
+
+                {% endblock %}
             </ul>
             {% if not user.is_authenticated %}
                 <ul class="navbar-nav">

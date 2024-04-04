@@ -1,5 +1,18 @@
 {% extends 'layout.html' %}
 
+{% block header %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                Заказы
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                {{ count_rooms }}
+              </span>
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <div class="row">
         {% for room in rooms %}

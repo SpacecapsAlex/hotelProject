@@ -2,15 +2,24 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from .models import Room, RoomType
+from booking.models import Basket
 
 
 def room_list(request):
     rooms = Room.objects.filter(is_deleted=False)
+    if request.user.is_authenticated:
+        basket_count = Basket.objects.filter(user=request.user).count()
+        return render(request, 'rooms/room_list.html', {'rooms': rooms, 'count_rooms': basket_count})
     return render(request, 'rooms/room_list.html', {'rooms': rooms})
 
 
 def room_detail(request, room_id):
     room = Room.objects.get(id=room_id)
+
+    if request.user.is_authenticated:
+        is_in_basket = Basket.objects.filter(user=request.user, room=room).exists()
+
+        return render(request, 'rooms/room_detail.html', {'room': room, 'is_in_basket': is_in_basket})
     return render(request, 'rooms/room_detail.html', {'room': room})
 
 

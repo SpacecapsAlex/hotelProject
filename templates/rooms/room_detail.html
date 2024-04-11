@@ -25,7 +25,7 @@
                                 data-target="#deleteModal">
                             Удалить
                         </button>
-                        {% if not is_in_basket %}
+                        {% if not is_in_basket and room.is_available %}
                             <form method="post" action="{% url 'addBasket' %}" class="d-inline-block">
                                 {% csrf_token %}
                                 <input type="hidden" name="room_id" value="{{ room.id }}">

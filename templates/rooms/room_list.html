@@ -3,9 +3,9 @@
 {% block header %}
     {% if user.is_authenticated %}
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'getBasket' %}">
                 Заказы
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white">
                 {{ count_rooms }}
               </span>
             </a>

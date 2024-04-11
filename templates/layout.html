@@ -83,6 +83,14 @@
     </nav>
 </header>
 
+<!-- Кнопки прикреплённые снизу-справа окна -->
+<div style="position: fixed; bottom: 60px; right: 10px; z-index: 10;">
+    <button type="button" style="border-radius: 50%; width: 45px; height: 45px;" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal">+</button>
+</div>
+<div style="position: fixed; bottom: 10px; right: 10px; z-index: 10">
+    <button type="button" style="border-radius: 50%; width: 45px; height: 45px;" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal">?</button>
+</div>
+
 <main role="main" class="container" style="padding: 15px">
     {% block content %}
     {% endblock %}
@@ -152,6 +160,27 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Регистрация</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Модалка для feedback -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h4>Обратная связь</h4>
+            </div>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <span>Форма запроса в поддержку</span>
+                </div>
+                <div class="modal-footer">
+                    <button disabled type="submit" class="btn btn-primary">Отправить</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                 </div>
             </form>

@@ -1,5 +1,16 @@
 {% extends 'layout.html' %}
 
+{% block modal_button %}
+    {% if user.is_authenticated %}
+        <!-- Кнопки прикреплённые снизу-справа окна -->
+        <div style="position: fixed; bottom: 10px; right: 10px; z-index: 10">
+            <button type="button" style="border-radius: 50%; width: 45px; height: 45px;" class="btn btn-primary"
+                    data-toggle="modal" data-target="#feedbackModal">?
+            </button>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block header %}
     {% if user.is_authenticated %}
         <li class="nav-item">

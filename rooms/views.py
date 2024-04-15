@@ -3,13 +3,19 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from .models import Room, RoomType
 from booking.models import Basket
+from feedback.models import TicketStatus, TicketCategory
 
 
 def room_list(request):
     rooms = Room.objects.filter(is_deleted=False)
     if request.user.is_authenticated:
         basket_count = Basket.objects.filter(user=request.user).count()
-        return render(request, 'rooms/room_list.html', {'rooms': rooms, 'count_rooms': basket_count})
+        tickets_category = TicketCategory.objects.all()
+        return render(request, 'rooms/room_list.html', {
+            'rooms': rooms,
+            'count_rooms': basket_count,
+            'tickets_category': tickets_category,
+        })
     return render(request, 'rooms/room_list.html', {'rooms': rooms})
 
 
@@ -44,10 +50,10 @@ def room_create(request):
             price = int(price)
 
             if (
-                not isinstance(room_type_id, int)
-                or not isinstance(number, int)
-                or not isinstance(beds, int)
-                or not isinstance(price, int)
+                    not isinstance(room_type_id, int)
+                    or not isinstance(number, int)
+                    or not isinstance(beds, int)
+                    or not isinstance(price, int)
             ):
                 raise ValidationError('Поля должны быть числовыми')
 
@@ -111,10 +117,10 @@ def room_update(request, room_id):
             price = int(price)
 
             if (
-                not isinstance(room_type_id, int)
-                or not isinstance(number, int)
-                or not isinstance(beds, int)
-                or not isinstance(price, int)
+                    not isinstance(room_type_id, int)
+                    or not isinstance(number, int)
+                    or not isinstance(beds, int)
+                    or not isinstance(price, int)
             ):
                 raise ValidationError('Поля должны быть числовыми')
 
